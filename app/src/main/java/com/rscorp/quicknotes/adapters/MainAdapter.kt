@@ -17,12 +17,12 @@ class MainAdapter : RecyclerView.Adapter<MainAdapter.MyViewHolder>() {
     }
 
     inner class MyViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        fun bindItems(position: Int) {
-            val tv_title = itemView.findViewById<TextView>(R.id.tv_title)
-            val tv_desc = itemView.findViewById<TextView>(R.id.tv_desc)
-            tv_title.text = list[position].title
-            tv_desc.text = list[position]?.description
-        }
+//        fun bindItems(position: Int) {
+//            val tv_title = itemView.findViewById<TextView>(R.id.tv_title)
+//            val tv_desc = itemView.findViewById<TextView>(R.id.tv_desc)
+//            tv_title.text = list[position].title
+//            tv_desc.text = list[position]?.description
+//        }
 
     }
 
@@ -31,7 +31,7 @@ class MainAdapter : RecyclerView.Adapter<MainAdapter.MyViewHolder>() {
     }
 
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
-        holder.bindItems(position)
+//        holder.bindItems(position)
     }
 
     override fun getItemCount(): Int  = list.size

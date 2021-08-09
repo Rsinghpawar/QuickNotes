@@ -13,6 +13,8 @@ import kotlinx.coroutines.launch
 
 class MainViewModel @ViewModelInject constructor(private val notesDao: NotesDao, private val currentNotesDao : CurrentNotesDao) : ViewModel() {
 
+
+
     val quickNotes : LiveData<List<CurrentNoteData>> = currentNotesDao.getNotes()
     val mainNotes = MutableLiveData<NoteData>()
 
