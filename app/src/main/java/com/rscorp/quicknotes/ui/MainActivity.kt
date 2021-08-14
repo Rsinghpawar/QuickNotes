@@ -34,7 +34,6 @@ class MainActivity : AppCompatActivity() {
         setUpOuterAdapter()
         observeData()
     }
-    var localDate = ""
 
     private fun getInnerAdapter()  = object : GenericAdapter< CurrentNoteData , RvInnerNotesItemBinding>(this){
             override fun getLayoutResId(viewType: Int?): Int  = R.layout.rv_inner_notes_item
@@ -62,7 +61,10 @@ class MainActivity : AppCompatActivity() {
 
             override fun onBindData(model: DateOutNotesList, position: Int, dataBinding: ItemRvBinding) {
                 dataBinding.apply {
-                    tvDate.text = model.date
+                    if (model.date == getDesiredDateFormat(DateUtil.getTodayDateMidNight()))
+                        tvDate.text = "Today"
+                    else
+                        tvDate.text = model.date
                     val innerAdapter = getInnerAdapter()
                     rvInner.adapter = innerAdapter
                     innerAdapter.updateList(model.notesList)
