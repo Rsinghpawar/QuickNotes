@@ -42,9 +42,10 @@
         <View
             android:id="@+id/lineView"
             android:layout_width="0dp"
-            app:layout_constraintStart_toStartOf="@+id/imgNoteIcon"
-            app:layout_constraintEnd_toEndOf="@+id/tvNote"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
             android:layout_height="1dp"
+            android:layout_marginHorizontal="10dp"
             android:layout_marginTop="12dp"
             android:background="#EDF0F9"
             app:layout_constraintBottom_toBottomOf="parent" />

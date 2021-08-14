@@ -38,7 +38,8 @@
             app:cardElevation="0dp">
 
             <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/rvMain"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                android:id="@+id/rvInner"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 tools:listitem="@layout/rv_inner_notes_item"

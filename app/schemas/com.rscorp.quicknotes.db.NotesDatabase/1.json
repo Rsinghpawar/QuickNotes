@@ -2,10 +2,10 @@
   "formatVersion": 1,
   "database": {
     "version": 1,
-    "identityHash": "3d254242b9990d1eb9e74dc72cd45f62",
+    "identityHash": "cbda45cd37dbcb2ea2a3ecdb71663760",
     "entities": [
       {
-        "tableName": "notes_table",
+        "tableName": "dates_notes_table",
         "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `title` TEXT NOT NULL, `description` TEXT NOT NULL, `date` TEXT NOT NULL)",
         "fields": [
           {
@@ -108,7 +108,7 @@
     "views": [],
     "setupQueries": [
       "CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)",
-      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, '3d254242b9990d1eb9e74dc72cd45f62')"
+      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, 'cbda45cd37dbcb2ea2a3ecdb71663760')"
     ]
   }
 }

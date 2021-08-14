@@ -5,14 +5,14 @@ import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
-import com.rscorp.quicknotes.db.models.NoteData
+import com.rscorp.quicknotes.db.models.DatesNotesTable
 
 @Dao
 interface NotesDao {
 
     @Insert(onConflict = OnConflictStrategy.IGNORE)
-    fun saveNotes(data : NoteData) : Long
+    fun saveNotes(data : DatesNotesTable) : Long
 
-    @Query("SELECT * FROM notes_table")
-    fun getNotes() : LiveData<List<NoteData>>
+    @Query("SELECT * FROM current_notes_table")
+    fun getNotes() : LiveData<List<DatesNotesTable>>
 }

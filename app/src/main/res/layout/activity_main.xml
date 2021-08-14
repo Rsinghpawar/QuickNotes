@@ -15,10 +15,8 @@
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rv_main"
-
             android:layout_width="match_parent"
             tools:listitem="@layout/item_rv"
-
             android:layout_height="wrap_content"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
             app:layout_constraintEnd_toEndOf="parent"

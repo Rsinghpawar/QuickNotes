@@ -141,4 +141,8 @@ object DateUtil {
         val remainMinutes = minutes - TimeUnit.HOURS.toMinutes(hours)
         return "$hours hr $remainMinutes min"
     }
+
+    fun getDesiredDateFormat(millis : Long) : String {
+        return DateUtil.deserializeDateFromMilliSecond(millis , CUSTOM_DATE_REMINDER_YYYY)
+    }
 }

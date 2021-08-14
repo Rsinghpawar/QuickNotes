@@ -3,10 +3,10 @@ package com.rscorp.quicknotes.db
 import androidx.room.Database
 import androidx.room.RoomDatabase
 import com.rscorp.quicknotes.db.models.CurrentNoteData
-import com.rscorp.quicknotes.db.models.NoteData
+import com.rscorp.quicknotes.db.models.DatesNotesTable
 
 
-@Database(entities = [NoteData::class , CurrentNoteData::class] , version = 1)
+@Database(entities = [DatesNotesTable::class , CurrentNoteData::class] , version = 1)
 abstract class NotesDatabase : RoomDatabase() {
 
     abstract fun getNotesDao() : NotesDao

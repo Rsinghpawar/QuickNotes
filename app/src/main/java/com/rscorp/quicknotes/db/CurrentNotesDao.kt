@@ -6,7 +6,6 @@ import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
 import com.rscorp.quicknotes.db.models.CurrentNoteData
-import com.rscorp.quicknotes.db.models.NoteData
 
 @Dao
 interface CurrentNotesDao {

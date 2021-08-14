@@ -1,26 +1,16 @@
 package com.rscorp.quicknotes.services
 
-import android.app.ActionBar
-import android.app.Activity
-import android.app.AlertDialog
 import android.app.Dialog
-import android.content.Intent
-import android.content.Intent.FLAG_ACTIVITY_NEW_TASK
 import android.os.Build
 import android.service.quicksettings.Tile
 import android.service.quicksettings.TileService
 import android.util.Log
-import android.widget.Button
 import android.widget.EditText
-import android.widget.Spinner
 import android.widget.TextView
 import androidx.annotation.RequiresApi
-import androidx.core.view.marginLeft
-import com.google.android.material.textfield.TextInputEditText
 import com.rscorp.quicknotes.R
 import com.rscorp.quicknotes.db.CurrentNotesDao
 import com.rscorp.quicknotes.db.models.CurrentNoteData
-import com.rscorp.quicknotes.ui.MainActivity
 import com.rscorp.quicknotes.util.DateUtil
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.GlobalScope
@@ -61,7 +51,7 @@ class QuickTileService : TileService() {
                         title = tIL.text.toString(),
                         description = "",
                         currentTimeInMilli = DateUtil.getTodayDateMidNight(),
-                        date = "",
+                        date = DateUtil.getDesiredDateFormat(DateUtil.getTodayDateMidNight()),
                         time = "",
                         tag = "",
                         color = -1
