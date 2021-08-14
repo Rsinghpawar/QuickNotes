@@ -21,7 +21,7 @@
             </intent-filter>
 
         </service>
-        <activity android:name=".ui.MainActivity">
+        <activity android:name=".ui.MainNotesActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

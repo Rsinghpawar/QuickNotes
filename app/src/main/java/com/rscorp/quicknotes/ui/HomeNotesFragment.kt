@@ -1,15 +1,15 @@
 package com.rscorp.quicknotes.ui
 
 import android.os.Bundle
-import android.util.Log
+import android.view.LayoutInflater
 import android.view.View
-import androidx.activity.viewModels
-import androidx.appcompat.app.AppCompatActivity
-import androidx.databinding.DataBindingUtil
-import androidx.recyclerview.widget.RecyclerView
+import android.view.ViewGroup
+import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
+import androidx.lifecycle.lifecycleScope
+import androidx.navigation.fragment.findNavController
 import com.rscorp.quicknotes.R
-import com.rscorp.quicknotes.adapters.MainAdapter
-import com.rscorp.quicknotes.databinding.ActivityMainBinding
+import com.rscorp.quicknotes.databinding.FragmentHomeNotesBinding
 import com.rscorp.quicknotes.databinding.ItemRvBinding
 import com.rscorp.quicknotes.databinding.RvInnerNotesItemBinding
 import com.rscorp.quicknotes.db.models.CurrentNoteData
@@ -18,24 +18,34 @@ import com.rscorp.quicknotes.util.DateUtil.CUSTOM_DATE_REMINDER_YYYY
 import com.rscorp.quicknotes.util.genericAdapter.GenericAdapter
 import com.rscorp.quicknotes.viewmodels.MainViewModel
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
-class MainActivity : AppCompatActivity() {
+class HomeNotesFragment : Fragment() {
 
-    private var dateHeadingAdapter: GenericAdapter<MainActivity.DateOutNotesList, ItemRvBinding>?=null
-    private var innerNotesAdapter: GenericAdapter<CurrentNoteData, RvInnerNotesItemBinding>?=null
+    private var dateHeadingAdapter: GenericAdapter<HomeNotesFragment.DateOutNotesList, ItemRvBinding>?=null
     private val viewModel by viewModels<MainViewModel>()
-    lateinit var adapter: MainAdapter
-    private var dateOutNotesListList : ArrayList<DateOutNotesList> = arrayListOf()
-    lateinit var binding : ActivityMainBinding
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        binding =  DataBindingUtil.setContentView(this, R.layout.activity_main)
+    private lateinit var binding : FragmentHomeNotesBinding
+
+    override fun onCreateView(
+        inflater: LayoutInflater, container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View {
+        binding = FragmentHomeNotesBinding.inflate(inflater, container, false)
+        return binding.root
+    }
+
+
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
         setUpOuterAdapter()
         observeData()
     }
 
-    private fun getInnerAdapter()  = object : GenericAdapter< CurrentNoteData , RvInnerNotesItemBinding>(this){
+    private fun getInnerAdapter()  = object : GenericAdapter< CurrentNoteData , RvInnerNotesItemBinding>(requireContext()){
             override fun getLayoutResId(viewType: Int?): Int  = R.layout.rv_inner_notes_item
 
             override fun onBindData(model: CurrentNoteData, position: Int, dataBinding: RvInnerNotesItemBinding) {
@@ -56,7 +66,7 @@ class MainActivity : AppCompatActivity() {
 
 
     private fun setUpOuterAdapter(){
-        dateHeadingAdapter  = object : GenericAdapter<DateOutNotesList , ItemRvBinding>(this){
+        dateHeadingAdapter  = object : GenericAdapter<DateOutNotesList , ItemRvBinding>(requireContext()){
             override fun getLayoutResId(viewType: Int?): Int  = R.layout.item_rv
 
             override fun onBindData(model: DateOutNotesList, position: Int, dataBinding: ItemRvBinding) {
@@ -90,7 +100,7 @@ class MainActivity : AppCompatActivity() {
         val dateOutNotesList = mutableListOf<DateOutNotesList>()
         val dateHash = hashSetOf<String>()
 
-        viewModel.quickNotes.observe(this, {
+        viewModel.quickNotes.observe(viewLifecycleOwner, {
             it?.let { listCnd ->
                for (it in listCnd.asReversed()) {
                     val date = getDesiredDateFormat(it.currentTimeInMilli)
