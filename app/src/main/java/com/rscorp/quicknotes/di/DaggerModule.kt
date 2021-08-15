@@ -1,6 +1,7 @@
 package com.rscorp.quicknotes.di
 
 import android.content.Context
+import android.content.SharedPreferences
 import androidx.room.Room
 import androidx.room.RoomDatabase
 import com.rscorp.quicknotes.db.CurrentNotesDao
@@ -36,6 +37,13 @@ object DaggerModule {
     @Singleton
     fun provideCurrentNotesDao(notesDatabase: NotesDatabase): CurrentNotesDao {
         return notesDatabase.getCurrentNotesDao()
+    }
+
+
+    @Provides
+    @Singleton
+    fun provideSharedPref(@ApplicationContext context: Context) : SharedPreferences{
+        return context.getSharedPreferences( "MyPreference", Context.MODE_PRIVATE)
     }
 
 

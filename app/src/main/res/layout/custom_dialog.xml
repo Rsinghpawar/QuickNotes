@@ -10,58 +10,69 @@
     android:orientation="vertical">
 
     <TextView
-        android:id="@+id/tv_tile"
+        android:id="@+id/tvTitle"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_margin="5dp"
+        android:fontFamily="sans-serif-condensed"
+        android:letterSpacing="0.01"
         android:text="Add a note"
         android:textColor="@color/black"
-        android:textSize="20sp"
+        android:textSize="18sp"
+        android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <EditText
+
+    <Spinner
+        android:id="@+id/spinner"
+        android:background="@android:color/transparent"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="visible"
+        app:layout_constraintBottom_toBottomOf="@+id/edit_todo"
+        app:layout_constraintEnd_toStartOf="@+id/edit_todo"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/edit_todo" />
+
+    <androidx.appcompat.widget.AppCompatEditText
         android:id="@+id/edit_todo"
-        android:layout_width="match_parent"
-        android:layout_height="45dp"
+        android:layout_width="0dp"
+        android:layout_marginStart="10dp"
+        android:layout_height="wrap_content"
+        android:minHeight="45dp"
+        android:layout_marginTop="10dp"
         android:background="@drawable/custom_input"
         android:paddingStart="2dp"
         android:paddingEnd="2dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tv_tile" />
-
-    <Spinner
-        android:id="@+id/spinner"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/edit_todo" />
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/spinner"
+        app:layout_constraintTop_toBottomOf="@+id/tvTitle" />
 
 
-
-    <Button
+    <com.google.android.material.button.MaterialButton
         android:id="@+id/btn_save"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="5dp"
-        android:backgroundTint="@color/purple_500"
-        android:padding="5dp"
+        android:layout_marginTop="10dp"
+        android:hapticFeedbackEnabled="true"
         android:text="Save"
+        android:textAllCaps="false"
         android:textColor="@color/white"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/spinner" />
+        app:layout_constraintTop_toBottomOf="@+id/edit_todo" />
 
-    <TextView
+    <com.google.android.material.button.MaterialButton
         android:id="@+id/btn_cancel"
+        style="@style/Widget.MaterialComponents.Button.TextButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="10dp"
+        android:layout_marginEnd="20dp"
         android:padding="5dp"
         android:text="Cancel"
-        android:textColor="@color/black"
-
+        android:textAllCaps="false"
         app:layout_constraintBottom_toBottomOf="@+id/btn_save"
         app:layout_constraintEnd_toStartOf="@+id/btn_save"
         app:layout_constraintTop_toTopOf="@+id/btn_save" />

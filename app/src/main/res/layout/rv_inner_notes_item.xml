@@ -17,12 +17,16 @@
             app:layout_constraintStart_toStartOf="parent"
             android:layout_margin="10dp"
             android:id="@+id/imgNoteIcon"
-            android:layout_width="24dp"
-            android:layout_height="24dp"
+            android:layout_width="28dp"
+            app:contentPadding="2dp"
+            tools:src="@drawable/ic_music"
+            android:layout_height="28dp"
             app:layout_constraintBottom_toBottomOf="@+id/tvNote"
             app:layout_constraintTop_toTopOf="@+id/tvNote"
             app:shapeAppearanceOverlay="@style/ThemeOverlay.RoundedCornersImageView8dp"
-            app:srcCompat="@color/black" />
+            app:strokeWidth="1dp"
+            app:strokeColor="@color/cardview_light_background"
+            />
 
 
         <androidx.appcompat.widget.AppCompatTextView

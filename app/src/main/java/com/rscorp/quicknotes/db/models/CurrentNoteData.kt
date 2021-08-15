@@ -13,5 +13,6 @@ data class CurrentNoteData(
     var date : String ,
     var time : String ,
     var tag : String ,
-    var color : Int
+    var color : Int,
+    var icon : Int
 )

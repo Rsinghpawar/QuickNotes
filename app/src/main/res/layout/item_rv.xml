@@ -24,7 +24,8 @@
             android:textStyle="bold"
             android:textSize="18sp"
             app:layout_constraintEnd_toEndOf="parent"
-            android:fontFamily="sans-serif-condensed" />
+            android:fontFamily="sans-serif-condensed"
+            />
 
         <com.google.android.material.card.MaterialCardView
             android:layout_width="match_parent"
