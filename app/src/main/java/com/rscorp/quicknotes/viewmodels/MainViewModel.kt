@@ -1,5 +1,6 @@
 package com.rscorp.quicknotes.viewmodels
 
+import android.util.Log
 import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -14,9 +15,15 @@ import kotlinx.coroutines.launch
 class MainViewModel @ViewModelInject constructor(private val notesDao: NotesDao, private val currentNotesDao : CurrentNotesDao) : ViewModel() {
 
 
+    var quickNotes : LiveData<List<CurrentNoteData>> = MutableLiveData()
 
-    val quickNotes : LiveData<List<CurrentNoteData>> = currentNotesDao.getNotes()
-    val mainNotes = MutableLiveData<DatesNotesTable>()
 
+    private fun getAllNotes() = viewModelScope.launch {
+        quickNotes = currentNotesDao.getNotes()
+    }
+
+    init {
+        getAllNotes()
+    }
 
 }

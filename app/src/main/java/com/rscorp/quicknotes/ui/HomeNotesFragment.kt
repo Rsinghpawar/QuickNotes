@@ -1,13 +1,12 @@
 package com.rscorp.quicknotes.ui
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.lifecycleScope
-import androidx.navigation.fragment.findNavController
 import com.rscorp.quicknotes.R
 import com.rscorp.quicknotes.databinding.FragmentHomeNotesBinding
 import com.rscorp.quicknotes.databinding.ItemRvBinding
@@ -18,14 +17,11 @@ import com.rscorp.quicknotes.util.DateUtil.CUSTOM_DATE_REMINDER_YYYY
 import com.rscorp.quicknotes.util.genericAdapter.GenericAdapter
 import com.rscorp.quicknotes.viewmodels.MainViewModel
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.delay
-import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
 class HomeNotesFragment : Fragment() {
 
-    private var dateHeadingAdapter: GenericAdapter<HomeNotesFragment.DateOutNotesList, ItemRvBinding>?=null
+    private var dateHeadingAdapter: GenericAdapter<DateOutNotesList, ItemRvBinding>?=null
     private val viewModel by viewModels<MainViewModel>()
     private lateinit var binding : FragmentHomeNotesBinding
 
@@ -34,6 +30,7 @@ class HomeNotesFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         binding = FragmentHomeNotesBinding.inflate(inflater, container, false)
+        observeData()
         return binding.root
     }
 
@@ -42,7 +39,6 @@ class HomeNotesFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         setUpOuterAdapter()
-        observeData()
     }
 
     private fun getInnerAdapter()  = object : GenericAdapter< CurrentNoteData , RvInnerNotesItemBinding>(requireContext()){
@@ -101,6 +97,7 @@ class HomeNotesFragment : Fragment() {
         val dateHash = hashSetOf<String>()
 
         viewModel.quickNotes.observe(viewLifecycleOwner, {
+            Log.d("TAG", "observeData: $it")
             it?.let { listCnd ->
                for (it in listCnd.asReversed()) {
                     val date = getDesiredDateFormat(it.currentTimeInMilli)

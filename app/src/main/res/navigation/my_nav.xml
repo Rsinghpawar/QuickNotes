@@ -11,7 +11,7 @@
         tools:layout="@layout/fragment_home_notes"
         />
     <fragment
-        android:id="@+id/foodJokeFragment2"
+        android:id="@+id/foodJokeFragment"
         android:name="com.rscorp.quicknotes.ui.FoodJokeFragment"
         android:label="FoodJokeFragment"
         tools:layout="@layout/fragment_food_joke"
