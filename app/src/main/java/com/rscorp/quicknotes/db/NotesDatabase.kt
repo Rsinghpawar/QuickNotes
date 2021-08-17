@@ -6,7 +6,7 @@ import com.rscorp.quicknotes.db.models.CurrentNoteData
 import com.rscorp.quicknotes.db.models.DatesNotesTable
 
 
-@Database(entities = [DatesNotesTable::class , CurrentNoteData::class] , version = 1)
+@Database(entities = [DatesNotesTable::class , CurrentNoteData::class] , version = 2)
 abstract class NotesDatabase : RoomDatabase() {
 
     abstract fun getNotesDao() : NotesDao

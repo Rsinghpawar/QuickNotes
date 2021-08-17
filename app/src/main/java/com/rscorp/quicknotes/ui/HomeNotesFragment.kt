@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.core.widget.addTextChangedListener
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import com.rscorp.quicknotes.R
 import com.rscorp.quicknotes.databinding.FragmentHomeNotesBinding
@@ -25,7 +26,7 @@ import java.lang.Exception
 class HomeNotesFragment : Fragment() {
 
     private var dateHeadingAdapter: GenericAdapter<DateOutNotesList, ItemRvBinding>? = null
-    private val viewModel by viewModels<MainViewModel>()
+    private val viewModel by activityViewModels<MainViewModel>()
     private lateinit var binding: FragmentHomeNotesBinding
 
     override fun onCreateView(
@@ -78,10 +79,13 @@ class HomeNotesFragment : Fragment() {
             }
 
             override fun onItemClick(view: View, model: CurrentNoteData, position: Int) {
-
+                val fragment = NoteBottomSheetFragment()
+                viewModel.selectedNoteData = model
+                fragment.show(childFragmentManager , "bottomsheet")
             }
 
             override fun onInnerItemClick(view: View, model: CurrentNoteData, position: Int) {
+
 
             }
 

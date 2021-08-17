@@ -2,6 +2,7 @@ package com.rscorp.quicknotes.ui
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.activity.viewModels
 import androidx.databinding.DataBindingUtil
 import androidx.navigation.NavController
 import androidx.navigation.findNavController
@@ -11,12 +12,13 @@ import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
 import com.rscorp.quicknotes.R
 import com.rscorp.quicknotes.databinding.ActivityMainNewBinding
+import com.rscorp.quicknotes.viewmodels.MainViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
 class MainNotesActivity : AppCompatActivity() {
 
-
+    private val viewModel by viewModels<MainViewModel>()
     private lateinit var navController: NavController
     private lateinit var binding : ActivityMainNewBinding
     override fun onCreate(savedInstanceState: Bundle?) {

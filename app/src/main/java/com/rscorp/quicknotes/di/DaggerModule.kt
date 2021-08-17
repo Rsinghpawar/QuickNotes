@@ -4,6 +4,8 @@ import android.content.Context
 import android.content.SharedPreferences
 import androidx.room.Room
 import androidx.room.RoomDatabase
+import androidx.room.migration.Migration
+import androidx.sqlite.db.SupportSQLiteDatabase
 import com.rscorp.quicknotes.db.CurrentNotesDao
 import com.rscorp.quicknotes.db.NotesDao
 import com.rscorp.quicknotes.db.NotesDatabase
@@ -23,7 +25,15 @@ object DaggerModule {
     @Provides
     @Singleton
     fun provideNotesDatabase(@ApplicationContext context: Context): NotesDatabase {
-        return Room.databaseBuilder(context, NotesDatabase::class.java, "image_db").build()
+        val database =  Room.databaseBuilder(context, NotesDatabase::class.java, "image_db")
+            .addMigrations(object : Migration(1,2){
+                override fun migrate(database: SupportSQLiteDatabase) {
+                    database.execSQL("ALTER TABLE 'current_notes_table' ADD COLUMN 'iconPosition' Int NOT NULL DEFAULT 0")
+                }
+
+            })
+            .build()
+        return database
     }
 
 

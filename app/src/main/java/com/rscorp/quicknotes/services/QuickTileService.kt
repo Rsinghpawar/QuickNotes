@@ -63,7 +63,8 @@ class QuickTileService : TileService() {
                         time = "",
                         tag = hash.getValue(spinner.selectedItem as Int),
                         color = -1,
-                        icon = spinner.selectedItem as Int
+                        icon = spinner.selectedItem as Int,
+                        iconPosition = spinner.selectedItemPosition
                     )
                 )
                 withContext(Dispatchers.Main){

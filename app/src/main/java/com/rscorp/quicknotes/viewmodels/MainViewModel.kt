@@ -14,16 +14,10 @@ class MainViewModel @ViewModelInject constructor(private val notesDao: NotesDao,
 
     var quickNotes : LiveData<List<CurrentNoteData>> = MutableLiveData()
     var searchNotes : LiveData<List<CurrentNoteData>> = MutableLiveData()
-
+    var selectedNoteData : CurrentNoteData? = null
 
     private fun getAllNotes() = viewModelScope.launch {
         quickNotes = currentNotesDao.getNotes()
-    }
-
-    fun searchNotes(query : String)  {
-//        Log.d("TAG", "searchNotes: $query")
-//        searchNotes = currentNotesDao.searchNotes(query)
-//        Log.d("TAG", "searchNotes: ${currentNotesDao.searchNotes(query).value}")
     }
 
     fun searchDatabase(searchQuery: String) =  currentNotesDao.searchNotes(searchQuery).asLiveData()
