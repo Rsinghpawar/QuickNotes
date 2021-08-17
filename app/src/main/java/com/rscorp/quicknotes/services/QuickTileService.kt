@@ -50,7 +50,7 @@ class QuickTileService : TileService() {
         val btnSave = alert.findViewById<TextView>(R.id.btn_save)
         val btnCancel = alert.findViewById<TextView>(R.id.btn_cancel)
         val spinner = alert.findViewById<Spinner>(R.id.spinner)
-        spinner.adapter = MySpinnerAdapter(this , arrayOf(R.drawable.ic_note_3 , R.drawable.ic_music , R.drawable.ic_url))
+        spinner.adapter = MySpinnerAdapter(this , PrefHelper.getIconsArray(this))
         btnSave.setOnClickListener {
             GlobalScope.launch {
                 currentNotesDao.saveNotes(

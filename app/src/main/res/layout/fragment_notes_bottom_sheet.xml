@@ -12,6 +12,18 @@
         android:layout_height="500dp"
         android:background="@color/purple_200">
 
+        <Spinner
+            android:id="@+id/spinner"
+            android:background="@android:color/transparent"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:visibility="visible"
+            android:layout_margin="10dp"
+            app:layout_constraintBottom_toBottomOf="@+id/tvNote"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/tvNote"
+            />
+
         <com.google.android.material.imageview.ShapeableImageView
             android:id="@+id/imgNoteIcon"
             android:layout_width="30dp"
@@ -42,10 +54,21 @@
             app:layout_constraintTop_toTopOf="parent"
             tools:text="Hello dummy note" />
 
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tvEdit"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="10dp"
+            android:layout_margin="10dp"
+            android:text="edit"
+            app:layout_constraintBottom_toBottomOf="@+id/tvNote"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/tvNote" />
+
 
         <androidx.recyclerview.widget.RecyclerView
             android:layout_width="match_parent"
-            android:layout_height="100dp"
+            android:layout_height="200dp"
             android:background="@color/white"
             android:orientation="horizontal"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"

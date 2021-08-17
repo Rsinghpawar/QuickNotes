@@ -14,6 +14,7 @@ class MainViewModel @ViewModelInject constructor(private val notesDao: NotesDao,
 
     var quickNotes : LiveData<List<CurrentNoteData>> = MutableLiveData()
     var searchNotes : LiveData<List<CurrentNoteData>> = MutableLiveData()
+    var isEditing : MutableLiveData<Boolean> = MutableLiveData(false)
     var selectedNoteData : CurrentNoteData? = null
 
     private fun getAllNotes() = viewModelScope.launch {

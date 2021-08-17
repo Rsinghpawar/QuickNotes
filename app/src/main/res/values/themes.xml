@@ -16,10 +16,12 @@
 
     </style>
 
-    <style name="AlertDialogCustom" parent="Theme.MaterialComponents.DayNight.Dialog.Alert">
+    <style name="AlertDialogCustom" parent="Theme.MaterialComponents.Light.Dialog.Alert">
         <!-- Used for the buttons -->
         <item name="colorAccent">@color/purple_700</item>
-<!--        &lt;!&ndash; Used for the title and text &ndash;&gt;-->
+        <item name="android:forceDarkAllowed" tools:targetApi="q">false</item>
+
+        <!--        &lt;!&ndash; Used for the title and text &ndash;&gt;-->
 <!--        <item name="android:textColorPrimary">@color/purple_500</item>-->
 <!--        &lt;!&ndash; Used for the background &ndash;&gt;-->
 <!--        <item name="android:background">@color/white</item>-->

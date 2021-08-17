@@ -26,12 +26,6 @@ class MainNotesActivity : AppCompatActivity() {
         binding =  DataBindingUtil.setContentView(this, R.layout.activity_main_new)
 
         navController = findNavController(R.id.nav_host_fragment)
-        val appBarConfiguration = AppBarConfiguration(
-            setOf(
-               R.id.homeNotesFragment,
-                R.id.foodJokeFragment
-            )
-        )
         NavigationUI.setupWithNavController(binding.bottomNavigationView , navController)
 //        binding.bottomNavigationView.setupWithNavController(navController)
 //        setupActionBarWithNavController(navController , appBarConfiguration)

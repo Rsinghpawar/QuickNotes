@@ -8,7 +8,6 @@ import android.view.ViewGroup
 import androidx.core.widget.addTextChangedListener
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
-import androidx.fragment.app.viewModels
 import com.rscorp.quicknotes.R
 import com.rscorp.quicknotes.databinding.FragmentHomeNotesBinding
 import com.rscorp.quicknotes.databinding.ItemRvBinding
@@ -20,7 +19,6 @@ import com.rscorp.quicknotes.util.PrefHelper
 import com.rscorp.quicknotes.util.genericAdapter.GenericAdapter
 import com.rscorp.quicknotes.viewmodels.MainViewModel
 import dagger.hilt.android.AndroidEntryPoint
-import java.lang.Exception
 
 @AndroidEntryPoint
 class HomeNotesFragment : Fragment() {
@@ -47,7 +45,7 @@ class HomeNotesFragment : Fragment() {
     }
 
     private fun setIconsHash() {
-        PrefHelper.saveIconHasMap(
+        PrefHelper.saveIconHash(
             hashMapOf(
                 R.drawable.ic_url to "urls links",
                 R.drawable.ic_music to "musics songs",
@@ -55,6 +53,8 @@ class HomeNotesFragment : Fragment() {
             ),
             requireContext()
         )
+        PrefHelper.createIconsArray(requireContext() , arrayOf(R.drawable.ic_note_3 , R.drawable.ic_music , R.drawable.ic_url))
+        Log.d("TAG", "setIconsHash: ${PrefHelper.getIconsArray(requireContext())}")
     }
 
     private fun setSearchListener() {
