@@ -19,4 +19,8 @@ interface CurrentNotesDao {
 
     @Query("SELECT * FROM current_notes_table WHERE title LIKE :query OR tag LIKE :query OR date LIKE :query")
     fun searchNotes(query : String) : Flow<List<CurrentNoteData>>
+
+
+    @Query("UPDATE current_notes_table SET title = :title, icon = :icon , iconPosition = :iconPosition WHERE id = :id")
+    fun updateNote(id : Int ,title : String , icon : Int , iconPosition : Int )
 }

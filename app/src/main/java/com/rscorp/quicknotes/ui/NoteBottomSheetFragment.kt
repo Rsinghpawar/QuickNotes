@@ -13,6 +13,7 @@ import com.rscorp.quicknotes.R
 import com.rscorp.quicknotes.databinding.FragmentNotesBottomSheetBinding
 import com.rscorp.quicknotes.util.MySpinnerAdapter
 import com.rscorp.quicknotes.util.PrefHelper
+import com.rscorp.quicknotes.util.extensions.makeGone
 import com.rscorp.quicknotes.util.extensions.makeInVisible
 import com.rscorp.quicknotes.util.extensions.makeVisible
 import com.rscorp.quicknotes.viewmodels.MainViewModel
@@ -41,32 +42,42 @@ class NoteBottomSheetFragment : BottomSheetDialogFragment() {
     }
 
     private fun setClickListener(){
-        binding.tvEdit.setOnClickListener {
-            viewModel.apply {
-                isEditing.value = isEditing.value == false
+        binding.apply {
+            tvEdit.setOnClickListener {
+                viewModel.apply {
+                    isEditing.value = isEditing.value == false
+                }
             }
 
+            btnDone.setOnClickListener {
+                viewModel.selectedNoteData?.let {
+                    viewModel.updateTable(it.id, binding.tvNote.text.toString() , binding.spinner.selectedItem as Int , binding.spinner.selectedItemPosition )
+                }
+            }
         }
     }
 
     private fun observeData(){
         viewModel.isEditing.observe(viewLifecycleOwner , {
             if (it){
-                binding.root.setBackgroundColor(Color.RED)
                 binding.apply {
+                    btnDone.makeVisible()
+                    root.setBackgroundColor(Color.RED)
                     imgNoteIcon.makeInVisible()
-                    spinner.makeVisible()
-                    spinner.adapter = MySpinnerAdapter(requireContext() , PrefHelper.getIconsArray(requireContext()))
-                    spinner.setSelection(viewModel.selectedNoteData?.iconPosition ?: 0)
+                    tvEdit.text = "Save"
+                    spinner.apply {
+                        makeVisible()
+                        adapter = MySpinnerAdapter(requireContext() , PrefHelper.getIconsArray(requireContext()))
+                        setSelection(viewModel.selectedNoteData?.iconPosition ?: 0)
+                    }
                 }
-
             }else{
-                binding.root.setBackgroundColor(ContextCompat.getColor(requireContext(), R.color.purple_200))
                 binding.apply {
+                    btnDone.makeGone()
+                    root.setBackgroundColor(ContextCompat.getColor(requireContext(), R.color.purple_200))
+                    tvEdit.text = "Edit"
                     imgNoteIcon.makeVisible()
-                    spinner.makeVisible()
-                    spinner.adapter = MySpinnerAdapter(requireContext() , PrefHelper.getIconsArray(requireContext()))
-                    spinner.setSelection(viewModel.selectedNoteData?.iconPosition ?: 0)
+                    spinner.makeGone()
                 }
             }
         })
