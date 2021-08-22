@@ -34,6 +34,11 @@ class NotificationHelper(base: Context?) : ContextWrapper(base) {
             .setContentText("Your AlarmManager is working.")
             .setSmallIcon(R.drawable.ic_idea_bulb)
 
+    fun getNotificationBuilder(message: String) = NotificationCompat.Builder(applicationContext, channelID)
+        .setContentTitle("Quick Notes")
+        .setContentText(message)
+        .setSmallIcon(R.drawable.ic_idea_bulb)
+
     companion object {
         const val channelID = "channelID"
         const val channelName = "Channel Name"

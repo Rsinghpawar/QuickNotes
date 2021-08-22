@@ -9,7 +9,8 @@ import com.rscorp.quicknotes.util.NotificationHelper
 class AlertReceiver : BroadcastReceiver() {
     override fun onReceive(p0: Context?, p1: Intent?) {
         val notificationHelper = NotificationHelper(p0)
-        val channel = notificationHelper.channelNotification
+        val notificationText = p1?.getStringExtra("message")
+        val channel = notificationHelper.getNotificationBuilder(message = notificationText ?: "Oops Something went wrong")
         notificationHelper.manager?.notify(1,channel.build())
     }
 }

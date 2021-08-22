@@ -86,9 +86,11 @@ class QuickTileService : TileService() {
                 alert.dismiss()
 
             }
-            if (isSelected){
+            if (isSelected && tIL.text.toString().isNotEmpty()){
                 val alarmManager = getSystemService(Context.ALARM_SERVICE) as AlarmManager
-                val intent = Intent(this , AlertReceiver::class.java)
+                val intent = Intent(this , AlertReceiver::class.java).apply {
+                        putExtra("message" , tIL.text.toString() )
+                }
                 val pendingIntent = PendingIntent.getBroadcast(this , 1 , intent , 0)
                 alarmManager.setExact(AlarmManager.RTC_WAKEUP , 300000 , pendingIntent)
             }
