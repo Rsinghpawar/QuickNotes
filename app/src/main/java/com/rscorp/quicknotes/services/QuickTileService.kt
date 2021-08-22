@@ -1,6 +1,9 @@
 package com.rscorp.quicknotes.services
 
+import android.app.AlarmManager
 import android.app.Dialog
+import android.app.PendingIntent
+import android.content.Context
 import android.content.Intent
 import android.content.Intent.FLAG_ACTIVITY_NEW_TASK
 import android.os.Build
@@ -12,6 +15,7 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.annotation.RequiresApi
 import androidx.appcompat.widget.AppCompatImageView
+import com.google.android.material.chip.Chip
 import com.rscorp.quicknotes.R
 import com.rscorp.quicknotes.db.CurrentNotesDao
 import com.rscorp.quicknotes.db.models.CurrentNoteData
@@ -45,6 +49,7 @@ class QuickTileService : TileService() {
 //        val tile = qsTile
 //        tile.state = Tile.STATE_ACTIVE
 //        tile.updateTile()
+        var isSelected = false
         val hash = PrefHelper.getIconHashMap(this)
         val alert = Dialog(this, R.style.AlertDialogCustom).apply {
             setTitle("Quick title")
@@ -56,6 +61,8 @@ class QuickTileService : TileService() {
         val btnCancel = alert.findViewById<TextView>(R.id.btn_cancel)
         val spinner = alert.findViewById<Spinner>(R.id.spinner)
         val imgLaunch = alert.findViewById<AppCompatImageView>(R.id.imgLaunch)
+        val chip1Min = alert.findViewById<Chip>(R.id.chipReminder1)
+        val chip2Min = alert.findViewById<Chip>(R.id.chipReminder2)
         spinner.adapter = MySpinnerAdapter(this , PrefHelper.getIconsArray(this))
         btnSave.setOnClickListener {
             GlobalScope.launch {
@@ -77,9 +84,15 @@ class QuickTileService : TileService() {
                     Toast.makeText(this@QuickTileService, "Notes saved", Toast.LENGTH_SHORT).show()
                 }
                 alert.dismiss()
-//                tile.state = Tile.STATE_INACTIVE
-//                tile.updateTile()
+
             }
+            if (isSelected){
+                val alarmManager = getSystemService(Context.ALARM_SERVICE) as AlarmManager
+                val intent = Intent(this , AlertReceiver::class.java)
+                val pendingIntent = PendingIntent.getBroadcast(this , 1 , intent , 0)
+                alarmManager.setExact(AlarmManager.RTC_WAKEUP , 300000 , pendingIntent)
+            }
+
         }
         btnCancel.setOnClickListener {
             alert.dismiss()
@@ -91,11 +104,13 @@ class QuickTileService : TileService() {
                 alert.dismiss()
                 startActivity(it)
             }
-//        intent.addFlags(FLAG_ACTIVITY_NEW_TASK)
-//        startActivity(intent)
         }
         showDialog(alert)
 
+        chip1Min.setOnClickListener {
+            isSelected = !isSelected
+            Toast.makeText(this, "$isSelected", Toast.LENGTH_SHORT).show()
+        }
     }
 
 }
