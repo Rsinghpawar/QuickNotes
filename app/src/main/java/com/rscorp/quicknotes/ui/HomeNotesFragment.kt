@@ -49,12 +49,12 @@ class HomeNotesFragment : Fragment() {
             hashMapOf(
                 R.drawable.ic_url to "urls links",
                 R.drawable.ic_music to "musics songs",
-                R.drawable.ic_note_3 to "notes todo"
+                R.drawable.ic_note_3 to "notes todo",
+                R.drawable.ic_idea_bulb to "ideas bulbs"
             ),
             requireContext()
         )
-        PrefHelper.createIconsArray(requireContext() , arrayOf(R.drawable.ic_note_3 , R.drawable.ic_music , R.drawable.ic_url))
-        Log.d("TAG", "setIconsHash: ${PrefHelper.getIconsArray(requireContext())}")
+        PrefHelper.createIconsArray(requireContext() , arrayOf(R.drawable.ic_note_3 , R.drawable.ic_music , R.drawable.ic_url , R.drawable.ic_idea_bulb))
     }
 
     private fun setSearchListener() {
@@ -135,11 +135,6 @@ class HomeNotesFragment : Fragment() {
     private fun observeData() {
         val dateOutNotesList = mutableListOf<DateOutNotesList>()
         val dateHash = hashSetOf<String>()
-
-        viewModel.searchNotes.observe(viewLifecycleOwner, {
-            Log.d("TAG", "observeData: $it")
-
-        })
 
 
         viewModel.quickNotes.observe(viewLifecycleOwner, {

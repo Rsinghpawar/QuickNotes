@@ -1,5 +1,6 @@
 package com.rscorp.quicknotes.ui
 
+import android.content.DialogInterface
 import android.graphics.Color
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -24,6 +25,7 @@ class NoteBottomSheetFragment : BottomSheetDialogFragment() {
 
     private lateinit var binding: FragmentNotesBottomSheetBinding
     private val viewModel by activityViewModels<MainViewModel>()
+    private lateinit var hash : HashMap<Int, String>
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -36,9 +38,11 @@ class NoteBottomSheetFragment : BottomSheetDialogFragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        hash = PrefHelper.getIconHashMap(requireContext())
         setUpUI()
         observeData()
         setClickListener()
+
     }
 
     private fun setClickListener(){
@@ -51,7 +55,11 @@ class NoteBottomSheetFragment : BottomSheetDialogFragment() {
 
             btnDone.setOnClickListener {
                 viewModel.selectedNoteData?.let {
-                    viewModel.updateTable(it.id, binding.tvNote.text.toString() , binding.spinner.selectedItem as Int , binding.spinner.selectedItemPosition )
+                    viewModel.updateTable(it.id, binding.tvNote.text.toString() ,
+                        binding.spinner.selectedItem as Int ,
+                        binding.spinner.selectedItemPosition ,
+                        hash.getValue(spinner.selectedItem as Int)
+                    )
                 }
             }
         }
@@ -92,5 +100,10 @@ class NoteBottomSheetFragment : BottomSheetDialogFragment() {
                 tvNote.text = it.title
             }
         }
+    }
+
+    override fun onDismiss(dialog: DialogInterface) {
+        super.onDismiss(dialog)
+        viewModel.isEditing.value = false
     }
 }

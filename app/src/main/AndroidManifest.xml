@@ -22,7 +22,8 @@
             </intent-filter>
 
         </service>
-        <activity android:name=".ui.MainNotesActivity">
+        <activity android:name=".ui.MainNotesActivity"
+            android:launchMode="singleTask">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

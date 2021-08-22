@@ -21,6 +21,6 @@ interface CurrentNotesDao {
     fun searchNotes(query : String) : Flow<List<CurrentNoteData>>
 
 
-    @Query("UPDATE current_notes_table SET title = :title, icon = :icon , iconPosition = :iconPosition WHERE id = :id")
-    fun updateNote(id : Int ,title : String , icon : Int , iconPosition : Int )
+    @Query("UPDATE current_notes_table SET title = :title, icon = :icon , iconPosition = :iconPosition , tag = :tag WHERE id = :id")
+    suspend fun updateNote(id : Int ,title : String , icon : Int , iconPosition : Int , tag : String )
 }
